@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../Scripts/angular.min.js"></script>
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"/-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+
+    <script src="../Module/Module.js"></script>
+    <script src="../Controllers/Controller.js"></script>
+</head>
+
+<body>
+    <div>
+        <br>
+    </div>
+    <div ng-controller="myController" class="container panel panel-default">
+        <form novalidate role="form" name="Angular">
+            <div class="form-group">
+                <input type="hidden" class="form-control" ng-model="contact.id">
+                <p>
+                    <label class="control-label" for="Name">Name :</label>
+                    <input type="text" name="Name" class="form-control" ng-model="contact.name" placeholder="Enter name" required>
+                    <span style="color:red" ng-show="Angular.Name.$dirty && Angular.Name.$invalid">
+                            <span ng-show="Angular.Name.$error.required">Username is required</span>
+                    </span>
+                </p>
+                <p>
+                    <label class="control-label " for="Email">Email :</label>
+                    <input type="email" name="email" class="form-control" ng-model="contact.email" placeholder="Enter email" required>
+                    <span style="color:red" ng-show="Angular.email.$dirty && Angular.email.$invalid">
+                            <span ng-show="Angular.email.$error.required">email is required</span>
+                    <span ng-show="Angular.email.$error.email">Invalid email</span>
+                    </span>
+                </p>
+
+                <label class="control-label" for="DOJ">Date of joining :</label>
+                <input type="text" class="form-control" ng-model="contact.doj" required my-picker />
+
+                <label class="control-label" for="Password">Password :</label>
+                <input type="password" class="form-control" ng-model="contact.pass" placeholder="Please enter password" required>
+
+                <label class="control-label " for="C Password">Confirm Password :</label>
+                <input type="password" class="form-control" ng-model="contact.cpass" placeholder="Confirm password" required>
+
+                <label class="control-label" for="Income">Income :</label>
+                <input type="number" class="form-control" ng-model="contact.income" placeholder="Please enter income" required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" ng-show="Angular.$invalid" ng-click="addUser()">Submit</button>
+                <button class="btn btn-info" ng-click="ClearFields()">Reset Form</button>
+            </div>
+                <button class="btn btn-primary" ng-href="/DisplayData">new page</button>
+        </form>
+    </div>
+<div ng-view=""></div>
+</body>
+
+</html>

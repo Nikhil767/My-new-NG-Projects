@@ -1,0 +1,26 @@
+<div class="table">
+    <table class="table table-condensed table table-hover">
+        <thead>
+            <tr class="info">
+                <th>Name <br><input type="text" placeholder="search name" ng-model="namesearch" /><span class="glyphicon glyphicon-search"></span></th>
+                <th>Email<br><input type="text" placeholder="search email" ng-model="emailsearch" /><span class="glyphicon glyphicon-search"></span></th>
+                <th>Date Of Joining</th>
+                <th>Income</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="u in users|filter:allsearch |filter:{name:namesearch} |filter:{name:emailsearch} |limitTo:3">
+            <tr class="danger">
+                <td>{{u.name |uppercase}}</td>
+                <td>{{u.email |lowercase}}</td>
+                <td>{{u.doj|date}}</td>
+                <td>{{u.income|currency}}</td>
+                <td>
+                    <button class="btn btn-warning" ng-click="edit(u.id)">Edit</button>
+                    <button class="btn btn-danger" ng-click="delete(u.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
