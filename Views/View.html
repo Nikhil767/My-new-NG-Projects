@@ -13,8 +13,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
 
+    <script src="../Services/myService.js"></script>
     <script src="../Module/Module.js"></script>
     <script src="../Controllers/Controller.js"></script>
+    <!--<script src="../Directives/directive.js"></script>
+    <script src="../Controllers/directiveController.js"></script>-->
 </head>
 
 <body>
@@ -25,6 +28,7 @@
         <form novalidate role="form" name="Angular">
             <div class="form-group">
                 <input type="hidden" class="form-control" ng-model="contact.id">
+
                 <p>
                     <label class="control-label" for="Name">Name :</label>
                     <input type="text" name="Name" class="form-control" ng-model="contact.name" placeholder="Enter name" required>
@@ -55,12 +59,38 @@
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" ng-show="Angular.$invalid" ng-click="addUser()">Submit</button>
-                <button class="btn btn-info" ng-click="ClearFields()">Reset Form</button>
+                <button class="btn btn-info" ng-click="ResertFields()">Reset Form</button>
             </div>
-                <button class="btn btn-primary" ng-href="/DisplayData">new page</button>
         </form>
+        <input type="checkbox" ng-model="showdata" />
+        <input type="text" placeholder="search for all..." ng-model="allsearch" /><span class="glyphicon glyphicon-search"></span>
+        <br><br>
+        <div ng-show="showdata" class="table">
+            <table class="table table-condensed table table-hover">
+                <thead>
+                    <tr class="info">
+                        <th>Name <br><input type="text" placeholder="search name" ng-model="namesearch" /><span class="glyphicon glyphicon-search"></span></th>
+                        <th>Email<br><input type="text" placeholder="search email" ng-model="emailsearch" /><span class="glyphicon glyphicon-search"></span></th>
+                        <th>Date Of Joining</th>
+                        <th>Income</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="u in users|filter:allsearch |filter:{name:namesearch} |filter:{name:emailsearch} |limitTo:3">
+                    <tr class="danger">
+                        <td>{{u.name |uppercase}}</td>
+                        <td>{{u.email |lowercase}}</td>
+                        <td>{{u.doj|date}}</td>
+                        <td>{{u.income|currency}}</td>
+                        <td>
+                            <button class="btn btn-warning" ng-click="edit(u.id)">Edit</button>
+                            <button class="btn btn-danger" ng-click="delete(u.id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-<div ng-view=""></div>
 </body>
 
 </html>
